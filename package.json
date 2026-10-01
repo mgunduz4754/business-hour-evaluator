@@ -1,0 +1,17 @@
+{
+  "name": "business-hour-evaluator",
+  "version": "0.1.0",
+  "description": "Determines if a given timestamp falls within defined business hours for a specific timezone, accounting for lunch breaks and weekends.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {}
+}
