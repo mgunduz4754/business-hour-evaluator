@@ -40,3 +40,10 @@ All time windows are **half-open**: `[start, end)`. The open boundary is inclusi
 - **DST gap/overlap days (spring forward, fall back) are handled by the formatter**, but the wall-clock instants that fall in a non-existent hour (e.g. 02:30 on a spring-forward day in `America/New_York`) will still resolve to *some* epoch — the formatter picks the canonical interpretation — and `isOpenAt` will answer based on that. If your schedule's open or close lands exactly in a DST gap, the resolved instant may differ from naive expectation; this is inherent to wall-clock-to-epoch conversion in any library.
 
 - **The runtime's ICU timezone database is authoritative.** If your Node was built against a stale or stripped ICU, some timezone names may be rejected. This is the cost of zero third-party dependencies.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
